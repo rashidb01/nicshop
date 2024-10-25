@@ -1,0 +1,28 @@
+
+services:
+  web:
+    build:
+      context: ./web
+    container_name: web-app
+    ports:
+      - "5000:8000"
+    volumes:
+      - ./web/src:/app
+    depends_on:
+      - admin
+    networks:
+      - webnet
+
+  admin:
+    build:
+      context: ./admin
+    container_name: admin-panel
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./admin/nicshop:/app
+    networks:
+      - webnet
+
+networks:
+  webnet:
